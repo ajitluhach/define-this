@@ -26,18 +26,19 @@ def main():
             sentences(examples to get)", type=int, default=5)
     args = parser.parse_args()
     get = Dictionary(base_url, app_id, app_key)
+    word = args.word
     while True:
         try:
-            if args.word:
+            if word:
                 if args.full_entry:
-                    get.entries(args.word)
-                    get.syns_and_antons(args.word)
+                    get.entries(word)
+                    get.syns_and_antons(word)
                 elif args.examples:
-                    get.examples(args.word)
+                    get.examples(word)
                 elif args.s:
-                    get.syns_and_antons(args.word)
+                    get.syns_and_antons(word)
                 else:
-                    get.definitions(args.word)
+                    get.definitions(word)
             sys.exit()
         except (SpellError, Exception) as e:
             print(e)
