@@ -140,7 +140,10 @@ class Dictionary(OxfordAPI):
     def syns_and_antons(self, word):
         response = self._get_syns_antons(word)
         if self._everything_good:
+            print(self._everything_good)
             self._parse_response(response)
+        else:
+            raise SpellError
 
     def search(self, query, limit=6):
         self._do_search(query, limit)
@@ -149,8 +152,9 @@ class Dictionary(OxfordAPI):
     def entries(self, word):
         response = self._get_entries(word)
         if self._everything_good:
+            self._parse_response(response)
+        else:
             raise SpellError
-        self._parse_response(response)
 
     def _everything_good(self, response):
         status_code = response.status_code
